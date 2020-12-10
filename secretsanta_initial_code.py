@@ -48,7 +48,6 @@ def appointer(fullname): # This is the part of code that assigns people to their
     selection = random.choice(options)
     shelveFile[fullname] = selection # Writing the selection to our database
     print(template.format(declensed(selection)))
-    print(list(shelveFile.items()))
 
 if __name__ == '__main__':
     print('Добро пожаловать в игру тайный Санта! \nНаши правила: \n1. Денежный лимит подарка - до 500 рублей. \n2. Подарок желательно упаковать так, чтобы не было понятно, что это и какой формы. \n')
