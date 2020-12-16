@@ -4,7 +4,7 @@ import shelve
 import random
 from utils import declensed, name_checked
 
-bot = telebot.TeleBot("1279033722:AAG4_U4YZuzD5g1MJdqH4d71yubktHx3-Qs")
+bot = telebot.TeleBot("<YOUR_TOKEN_HERE>")
 
 @bot.message_handler(commands=["start"])
 def start_message(message):
@@ -32,11 +32,13 @@ def appointer(message):
 	shelveFile = shelve.open("ShelveFile")
 	if text in shelveFile.keys():
 		bot.send_message(message.chat.id, "Ты уже знаешь свою жертву! Не пиши мне больше!")
+		bot.send_sticker(message.chat.id, "CAACAgIAAxkBAAKFd1_aJYoYk1XqUPS94w2LnVv57LImAAJ7AwACbbBCA1tz5hS9rf3YHgQ")
 		return
 	options = [i for i in participants if i.lower() != text and i.lower() not in shelveFile.values()]
 	selection = random.choice(options)
 	shelveFile[text] = selection.lower()
 	bot.send_message(message.chat.id, "Ты тайный Санта для {}, поздравляю!".format(declensed(selection)))
+	bot.send_sticker(message.chat.id, "CAACAgIAAxkBAAKFcV_aJTLNLLmTFNeZxQWQ-KPK7qtsAAJjAwACbbBCA-FJL7WrGAjMHgQ")
 	shelveFile.update()
 	shelveFile.close()
 
