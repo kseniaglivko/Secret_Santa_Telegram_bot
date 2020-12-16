@@ -9,6 +9,8 @@ def declensed(fullname):
             lst = name[:-1] + 'и ' + surname + 'а'
         elif last_char_surname == 'й':
             lst = name[:-1] + 'и ' + surname[:-2] + 'ого'
+        elif last_char_surname == 'а':
+            lst = name[:-1] + 'и ' + surname[:-1] + 'oй'
         else:
             lst = name[:-1] + 'и ' + surname
     elif last_char_name and last_char_surname == 'а':

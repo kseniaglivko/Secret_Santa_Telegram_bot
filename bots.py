@@ -16,7 +16,7 @@ def start_message(message):
 def start_again(message):
 	bot.send_message(message.chat.id, "Введи своё имя и фамилию:")
 
-participants = ["Ксения Гливко", "Илья Чернигин", "Илья Благодарный", "Антон Терентьев", "Ангелина Лущаева", "Александра Алексеева", "Геннадий Кислов"]
+participants = ["Ксения Гливко", "Илья Чернигин", "Илья Благодарный", "Антон Терентьев", "Ангелина Лущаева", "Александра Алексеева", "Геннадий Кислов", "Ася Усольцева"]
 
 @bot.message_handler(content_types=["text"])
 def checker(message):
