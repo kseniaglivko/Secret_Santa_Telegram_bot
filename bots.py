@@ -4,7 +4,7 @@ import shelve
 import random
 from utils import declensed
 
-bot = telebot.TeleBot("<YOUR TOKEN HERE>")
+bot = telebot.TeleBot("1279033722:AAG4_U4YZuzD5g1MJdqH4d71yubktHx3-Qs")
 
 @bot.message_handler(commands=["start"])
 def start_message(message):
@@ -20,26 +20,21 @@ participants = ["Ксения Гливко", "Илья Чернигин", "Ил�
 
 @bot.message_handler(content_types=["text"])
 def checker(message):
-	if message.text not in participants:
-		if message.text == "Ксюша Гливко":
-			return appointer("Ксения Гливко")
-		elif message.text == "Саша Алексеева":
-			return appointer("Александра Алексеева")
-		elif message.text == "Гена Кислов":
-			return appointer("Геннадий Кислов")
+	lower_list = map(lambda x: x.lower(), participants)
+	if message.text.lower() not in lower_list:
 		bot.send_message(message.chat.id, "Ошибочка вышла, перепроверь своё имя, умник... Или умница... Вы имеете право сами определять свой гендер.")
 		return start_again(message)
 	return appointer(message)
 
 def appointer(message):
 	shelveFile = shelve.open("ShelveFile")
-	if message.text in shelveFile.keys():
+	if message.text.lower() in shelveFile.keys():
 		bot.send_message(message.chat.id, "Ты уже знаешь свою жертву! Не пиши мне больше!")
 		return
-	options = [i for i in participants if i != message.text and i not in shelveFile.values()]
+	options = [i for i in participants if i.lower() != message.text.lower() and i.lower() not in shelveFile.values()]
 	selection = random.choice(options)
-	key = message.text
-	shelveFile[key] = selection
+	key = message.text.lower()
+	shelveFile[key] = selection.lower()
 	bot.send_message(message.chat.id, "Ты тайный Санта для {}, поздравляю!".format(declensed(selection)))
 	shelveFile.update()
 	shelveFile.close()
