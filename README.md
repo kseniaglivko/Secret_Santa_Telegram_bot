@@ -6,4 +6,4 @@ Telegram Bot to dynamically assign Secret Santas for a specific list of particip
 3. The name is checked to be in the database - to check whether the person already has an asignee. If the person enters his/her name twice - bot gives an error.
 4. After checking, bot assigns a name from the participants list and uploads information about Santa and the asignee to the database so the same name wouldn't be assigned twice or the person wouldn't be assigned to his/herself.
 
-At this point the bot doesn't work with low register.
+Bot is case insensitive.
