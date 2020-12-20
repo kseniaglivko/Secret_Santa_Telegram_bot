@@ -4,7 +4,7 @@ import shelve
 import random
 from utils import declensed, name_checked
 
-bot = telebot.TeleBot("1279033722:AAG4_U4YZuzD5g1MJdqH4d71yubktHx3-Qs")
+bot = telebot.TeleBot("<YOUR_TOKEN_HERE>")
 
 @bot.message_handler(commands=["start"])
 def start_message(message):
