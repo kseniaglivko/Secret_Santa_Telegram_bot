@@ -20,15 +20,29 @@ def declensed(fullname):
             lst = name + 'a ' + surname + 'a'
         elif last_char_name == 'й':
             lst = name[:-1] + 'я '+ surname + 'a'
+    elif last_char_surname == 'к':
+        lst = name + 'a ' + surname + 'a'
     return str(lst)
 
 def name_checked(name):
-    if name.lower() == "ксюша гливко":
+    if "гливко" in name.lower():
         return "ксения гливко"
-    elif name.lower() == "саша алексеева":
+    elif "алексеева" in name.lower():
         return "александра алексеева"
-    elif name.lower() == "гена кислов":
+    elif "кислов" in name.lower():
         return "геннадий кислов"
-    elif name.lower() == "анастасия усольцева":
+    elif "усольцева" in name.lower():
         return "ася усольцева"
+    elif "чернигин" in name.lower():
+        return "илья чернигин"
+    elif "благодарный" in name.lower():
+        return "илья благодарный"
+    elif "лущаева" in name.lower():
+        return "ангелина лущаева"
+    elif "терентьев" in name.lower():
+        return "антон терентьев"
+    elif "куликова" in name.lower():
+        return "мария куликова"
+    elif "панасюк" in name.lower():
+        return "александр панасюк"
     return name.lower()

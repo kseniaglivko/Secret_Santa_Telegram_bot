@@ -4,7 +4,7 @@ import shelve
 import random
 from utils import declensed, name_checked
 
-bot = telebot.TeleBot("<YOUR_TOKEN_HERE>")
+bot = telebot.TeleBot("1279033722:AAG4_U4YZuzD5g1MJdqH4d71yubktHx3-Qs")
 
 @bot.message_handler(commands=["start"])
 def start_message(message):
@@ -16,7 +16,7 @@ def start_message(message):
 def start_again(message):
 	bot.send_message(message.chat.id, "Введи своё имя и фамилию:")
 
-participants = ["Ксения Гливко", "Илья Чернигин", "Илья Благодарный", "Антон Терентьев", "Ангелина Лущаева", "Александра Алексеева", "Геннадий Кислов", "Ася Усольцева"]
+participants = ["Ксения Гливко", "Илья Чернигин", "Илья Благодарный", "Антон Терентьев", "Ангелина Лущаева", "Александра Алексеева", "Геннадий Кислов", "Ася Усольцева", "Мария Куликова", "Александр Панасюк"]
 
 @bot.message_handler(content_types=["text"])
 def checker(message):
