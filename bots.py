@@ -11,36 +11,53 @@ def start_message(message):
 	bot.send_message(message.chat.id, "Добро пожаловать в игру тайный Санта!")
 	bot.send_message(message.chat.id, "Наши правила: \n1. Денежный лимит подарка - до 500 рублей. \n2. Подарок желательно упаковать так, чтобы не было понятно, что это и какой формы.")
 	bot.send_message(message.chat.id, "Введи своё имя и фамилию:")
-	bot.register_next_step_handler(message, checker)
+	bot.register_next_step_handler(message, check)
+
 
 def start_again(message):
+	"""Called in case of an input error"""
 	bot.send_message(message.chat.id, "Введи своё имя и фамилию:")
 
-participants = ["Ксения Гливко", "Илья Чернигин", "Илья Благодарный", "Антон Терентьев", "Ангелина Лущаева", "Александра Алексеева", "Геннадий Кислов", "Ася Усольцева", "Мария Куликова", "Александр Панасюк"]
+
+participants = ["ксения гливко",
+				"илья чернигин",
+				"илья благодарный",
+				"антон терентьев",
+				"ангелина лущаева",
+				"александра алексеева",
+				"геннадий кислов",
+				"ася усольцева",
+				"мария куликова",
+				"александр панасюк",
+				]
+
 
 @bot.message_handler(content_types=["text"])
-def checker(message):
+def check(message):
+	"""Checks for the user's name to be in the participants list"""
 	text = name_checked(message.text)
-	lower_list = map(lambda x: x.lower(), participants)
-	if text not in lower_list:
+	if text not in participants:
 		bot.send_message(message.chat.id, "Ошибочка вышла, перепроверь своё имя, умник... Или умница... Вы имеете право сами определять свой гендер.")
 		return start_again(message)
-	return appointer(message)
+	return appoint(message)
 
-def appointer(message):
+
+def appoint(message):
+	"""Appoints a 'victim' for the Secret Santa and writes the two names in the db"""
 	text = name_checked(message.text)
 	shelveFile = shelve.open("ShelveFile")
 	if text in shelveFile.keys():
 		bot.send_message(message.chat.id, "Ты уже знаешь свою жертву! Не пиши мне больше!")
 		bot.send_sticker(message.chat.id, "CAACAgIAAxkBAAKFd1_aJYoYk1XqUPS94w2LnVv57LImAAJ7AwACbbBCA1tz5hS9rf3YHgQ")
 		return
-	options = [i for i in participants if i.lower() != text and i.lower() not in shelveFile.values()]
+	options = [i for i in participants if i != text and i not in shelveFile.values()]
 	selection = random.choice(options)
-	shelveFile[text] = selection.lower()
-	bot.send_message(message.chat.id, "Ты тайный Санта для {}, поздравляю!".format(declensed(selection)))
+	shelveFile[text] = selection
+	bot.send_message(message.chat.id, "Ты тайный Санта для {}, поздравляю!".format(declensed(selection).title()))
 	bot.send_sticker(message.chat.id, "CAACAgIAAxkBAAKFcV_aJTLNLLmTFNeZxQWQ-KPK7qtsAAJjAwACbbBCA-FJL7WrGAjMHgQ")
 	shelveFile.update()
 	shelveFile.close()
+
 
 if __name__ == "__main__":
 	bot.infinity_polling(True)
