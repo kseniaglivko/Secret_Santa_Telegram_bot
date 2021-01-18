@@ -1,4 +1,19 @@
+participants_surnames = {
+    "гливко": "ксения гливко",
+	"чернигин": "илья чернигин",
+	"благодарный": "илья благодарный",
+	"терентьев": "антон терентьев",
+	"лущаева": "ангелина лущаева",
+	"алексеева": "александра алексеева",
+	"кислов": "геннадий кислов",
+	"усольцева": "ася усольцева",
+	"куликова": "мария куликова",
+	"панасюк": "александр панасюк",
+    }
+
+
 def declensed(fullname):
+    """Returns denclensed name for the final message with the info about Secret Santa's appointee"""
     lst = fullname.split(' ')
     name = lst[0]
     surname = lst[1]
@@ -24,25 +39,12 @@ def declensed(fullname):
         lst = name + 'a ' + surname + 'a'
     return str(lst)
 
-def name_checked(name):
-    if "гливко" in name.lower():
-        return "ксения гливко"
-    elif "алексеева" in name.lower():
-        return "александра алексеева"
-    elif "кислов" in name.lower():
-        return "геннадий кислов"
-    elif "усольцева" in name.lower():
-        return "ася усольцева"
-    elif "чернигин" in name.lower():
-        return "илья чернигин"
-    elif "благодарный" in name.lower():
-        return "илья благодарный"
-    elif "лущаева" in name.lower():
-        return "ангелина лущаева"
-    elif "терентьев" in name.lower():
-        return "антон терентьев"
-    elif "куликова" in name.lower():
-        return "мария куликова"
-    elif "панасюк" in name.lower():
-        return "александр панасюк"
-    return name.lower()
+
+def name_checked(message):
+    """Returns the full form of the name to enable the use of diminutive names and such"""
+    fullname = message.split(' ')
+    for el in fullname:
+        if el not in participants_surnames.keys():
+            continue
+        return participants_surnames.get(el)
+
