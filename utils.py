@@ -12,7 +12,7 @@ participants_surnames = {
     }
 
 
-def declensed(fullname):
+def get_declensed_name(fullname):
     """Returns denclensed name for the final message with the info about Secret Santa's appointee"""
     lst = fullname.split(' ')
     name = lst[0]
@@ -40,11 +40,14 @@ def declensed(fullname):
     return str(lst)
 
 
-def name_checked(message):
+def get_proper_name(message):
     """Returns the full form of the name to enable the use of diminutive names and such"""
-    fullname = message.split(' ')
-    for el in fullname:
-        if el not in participants_surnames.keys():
-            continue
-        return participants_surnames.get(el)
-
+    try:
+        fullname = message.split(' ')
+    except AttributeError:
+        return "некорректное имя"
+    else:
+        for el in fullname:
+            if el not in participants_surnames.keys():
+                continue
+            return participants_surnames.get(el)
