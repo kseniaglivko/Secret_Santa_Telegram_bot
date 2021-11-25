@@ -1,7 +1,7 @@
 import unittest
 
-from utils import participants_surnames, get_proper_name
-from bot import participants, check_if_in_list
+from utils import get_proper_name
+from bot import check_if_username_is_in_list
 
 
 class MyTestCase(unittest.TestCase):
@@ -26,10 +26,11 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(formatted_name, None)
 
     def test_func_check_if_in_list_not_participant(self):
-        formatted_name = check_if_in_list("алиенора аквитанская")
+        formatted_name = check_if_username_is_in_list("алиенора аквитанская")
         self.assertEqual(
             formatted_name,
-            "Ошибочка вышла, перепроверь своё имя, умник... Или умница... Вы имеете право сами определять свой гендер.",
+            "Ошибочка вышла, перепроверь своё имя, умник..."
+            "Или умница... Вы имеете право сами определять свой гендер.",
         )
 
 
