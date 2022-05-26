@@ -1,3 +1,6 @@
+
+[![Build Status](http://kseniaglivko.teamcity.com/app/rest/builds/buildType:(id:SecretSantaTelegramBot_Build)/statusIcon)](https://kseniaglivko.teamcity.com/viewType.html?buildTypeId=SecretSantaTelegramBot_Build&guest=1)
+
 # Secret Santa Telegram bot
 This is a telegram bot to dynamically assign Secret Santas to a specific list of participants 
 
