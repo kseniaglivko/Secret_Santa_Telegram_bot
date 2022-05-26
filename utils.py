@@ -1,3 +1,6 @@
+"""Module contains methods for handling names."""
+
+
 participants_surnames = {
     "гливко": "ксения гливко",
     "чернигин": "илья чернигин",
@@ -13,7 +16,7 @@ participants_surnames = {
 
 
 def get_declensed_name(fullname):
-    """Returns denclensed name for the final message with the info about Secret Santa's appointee"""  # noqa
+    """Return denclensed name for the final message with the info about Secret Santa's appointee."""
     lst = fullname.split(" ")
     name = lst[0]
     surname = lst[1]
@@ -41,7 +44,7 @@ def get_declensed_name(fullname):
 
 
 def get_proper_name(message):
-    """Returns the full form of the name to enable the use of diminutive names and such"""  # noqa
+    """Return the full form of the name to enable the use of diminutive names and such."""
     try:
         fullname = message.split(" ")
     except AttributeError:

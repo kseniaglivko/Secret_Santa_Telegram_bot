@@ -1,4 +1,6 @@
-import telebot
+"""Module contains full bot logic."""
+
+import telebot  # type: ignore
 import shelve
 import random
 
@@ -22,7 +24,7 @@ participants = [
 
 @bot.message_handler(commands=["start"])
 def start_bot(message):
-    """After bot is activated, it sends welcome message, asks for user's name and waits for the next step."""  # noqa
+    """After bot is activated, it sends welcome message, asks for user's name and waits for the next step."""
     bot.send_message(message.chat.id, "Добро пожаловать в игру тайный Санта!")
     bot.send_message(
         message.chat.id,
@@ -41,8 +43,8 @@ def start_again(message):
 
 @bot.message_handler(content_types=["text"])
 def check_if_username_is_in_list(message):
-    """Checks for the user's name to be in the participants list"""
-    user_name = get_proper_name(message.text)
+    """Check for the user's name to be in the participants list."""
+    user_name = get_proper_name(message)
     if user_name not in participants:
         bot.send_message(
             message.chat.id,
@@ -54,7 +56,7 @@ def check_if_username_is_in_list(message):
 
 
 def assign_santa_to_person(message):
-    """Assigns user as Secret Santa to one of the participants and writes the two names in the db"""  # noqa
+    """Assign user as Secret Santa to one of the participants and writes the two names in the db."""
     user_name = get_proper_name(message.text)
     shelve_file = shelve.open("ShelveFile")
     if user_name in shelve_file.keys():
@@ -65,7 +67,7 @@ def assign_santa_to_person(message):
         # This part sends a sticker.
         bot.send_sticker(
             message.chat.id,
-            "CAACAgIAAxkBAAKFd1_aJYoYk1XqUPS94w2LnVv57LImAAJ7AwACbbBCA1tz5hS9rf3YHgQ",  # noqa
+            "CAACAgIAAxkBAAKFd1_aJYoYk1XqUPS94w2LnVv57LImAAJ7AwACbbBCA1tz5hS9rf3YHgQ",
         )
         # You may put another sticker id as an argument here.
         return
@@ -85,7 +87,7 @@ def assign_santa_to_person(message):
     )
     bot.send_sticker(
         message.chat.id,
-        "CAACAgIAAxkBAAKFcV_aJTLNLLmTFNeZxQWQ-KPK7qtsAAJjAwACbbBCA-FJL7WrGAjMHgQ",  # noqa
+        "CAACAgIAAxkBAAKFcV_aJTLNLLmTFNeZxQWQ-KPK7qtsAAJjAwACbbBCA-FJL7WrGAjMHgQ",
     )
     shelve_file.update()
     shelve_file.close()
